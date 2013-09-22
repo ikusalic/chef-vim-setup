@@ -1,0 +1,20 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    build-essential (1.4.2)
+    runit (1.2.0)
+      build-essential (>= 0.0.0)
+      yum (>= 0.0.0)
+    yum (2.3.2)
+
+GIT
+  remote: git://github.com/fnichol/chef-git.git
+  ref: master
+  sha: 6c19cbefcdad5ec0f62a64dae1f656d660698ea3
+  specs:
+    git (0.9.0)
+      runit (>= 0.0.0)
+
+DEPENDENCIES
+  git (>= 0)
+
