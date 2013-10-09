@@ -119,7 +119,7 @@ me an email or even better submit a pull request.
 
 The Vundle is my favorite pluing manager, and so some of features are
 Vundle-centric. If you'd like to use something else, you can do it via
-customisation attributes (running custom bash scripts) just send a pull
+customisation attributes (running custom bash scripts) or just send a pull
 request.
 
 
