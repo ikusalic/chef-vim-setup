@@ -2,7 +2,7 @@ default[:vim_setup][:base_packages]       = ['vim-gtk']
 default[:vim_setup][:additional_packages] = []
 
 default[:vim_setup][:dotfiles_repo]       = nil
-default[:vim_setup][:dotfiles_rvmrc_path] = 'vimrc'
+default[:vim_setup][:dotfiles_rvmrc_path] = '.vimrc'
 default[:vim_setup][:global_vimrc]        = true
 default[:vim_setup][:users]               = []
 
