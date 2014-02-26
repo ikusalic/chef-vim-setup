@@ -1,5 +1,9 @@
 include_recipe 'git'
 
+execute 'custom preinstall bash' do
+  command node[:vim_setup][:custom_preinstall_bash]
+end
+
 node[:vim_setup][:base_packages].each { |pkg| package pkg }
 
 node[:vim_setup][:additional_packages].each { |pkg| package pkg }

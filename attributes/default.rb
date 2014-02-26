@@ -6,8 +6,9 @@ default[:vim_setup][:dotfiles_rvmrc_path] = '.vimrc'
 default[:vim_setup][:global_vimrc]        = true
 default[:vim_setup][:users]               = []
 
-default[:vim_setup][:custom_bash_user]    = 'true'
-default[:vim_setup][:custom_bash_once]    = 'true'
+default[:vim_setup][:custom_preinstall_bash] = 'true'
+default[:vim_setup][:custom_bash_user]       = 'true'
+default[:vim_setup][:custom_bash_once]       = 'true'
 
 default[:vim_setup][:use_vundle]                    = false
 default[:vim_setup][:bundle_install]                = true
