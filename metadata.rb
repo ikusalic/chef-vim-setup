@@ -7,6 +7,6 @@ version          '0.1.4'
 
 depends          'git'
 
-%w[ ubuntu ].each do |os|
+%w[ ubuntu centos ].each do |os|
   supports os
 end
