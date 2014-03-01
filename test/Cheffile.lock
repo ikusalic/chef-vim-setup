@@ -1,11 +1,14 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
-    build-essential (1.4.2)
-    runit (1.2.0)
+    build-essential (1.4.4)
+    runit (1.5.8)
       build-essential (>= 0.0.0)
-      yum (>= 0.0.0)
-    yum (2.3.2)
+      yum (~> 3.0)
+      yum-epel (>= 0.0.0)
+    yum (3.1.2)
+    yum-epel (0.3.4)
+      yum (~> 3.0)
 
 GIT
   remote: git://github.com/fnichol/chef-git.git

@@ -31,11 +31,13 @@ This cookbook depends only on the [git cookbook][git-cookbook].
 
 The following attributes are available (default values are also show):
 
+~~~ruby
 default[:vim_setup][:build_from_source] = false
 default[:vim_setup][:build_parameters]  = <<-HERE
 --prefix=/usr --with-features=huge --enable-rubyinterp --enable-pythoninterp \
 --enable-python3interp --enable-luainterp --enable-perlinterp --enable-cscope
 HERE
+~~~
 
 The `:build_from_source` attribute specifies if Vim should be build from
 source or installed as package. It defaults to `false`. If
@@ -60,7 +62,7 @@ can be specified.
 ~~~ruby
 - default[:vim_setup][:dotfiles_repo]       = nil
 - default[:vim_setup][:dotfiles_rvmrc_path] = '.vimrc'
-- default[:vim_setup][:global]              = true
+- default[:vim_setup][:global_vimrc]        = true
 - default[:vim_setup][:users]               = []
 ~~~
 
@@ -68,8 +70,8 @@ The `:dotfiles_repo` attribute can specify the git repository that contains
 `.vimrc`, and the `:dotfiles_rvmrc_path` specifies the path to vimrc inside the
 repository.
 
-If the `:global` attribute is set to `true`, shared Vim will be set up. The
-`:users` attribute can specify a list of users for whom to set up vimrc in
+If the `:global_vimrc` attribute is set to `true`, shared Vim will be set up.
+The `:users` attribute can specify a list of users for whom to set up vimrc in
 their home directory.
 
 Note: both `:global` and `:users` attributes can be used at the same time.
@@ -77,25 +79,23 @@ Note: both `:global` and `:users` attributes can be used at the same time.
 
 ~~~ruby
 - default[:vim_setup][:custom_preinstall_bash] = 'true'
-- default[:vim_setup][:custom_bash_user]       = 'true'
 - default[:vim_setup][:custom_bash_once]       = 'true'
 ~~~
 
-The attributes `:custom_bash_user` and `:custom_bash_once` can specify custom
-scripts to execute for all individual users (executed as the user) and script
-to be executed once for the root.
+The attributes `:custom_preinstall_bash` and `:custom_bash_once` can specify
+custom scripts to be executed once as the root.
 
-The attribute `:custom_preinstall_bash` can specify custom shell script to be
-executed before any other action. It can be used to install dependencies
+The attribute `:custom_preinstall_bash` can be used to install dependencies
 needed to build Vim from source.
 * * *
 
 ~~~ruby
-- default[:vim_setup][:use_vundle]                    = false
-- default[:vim_setup][:bundle_install]                = true
-- default[:vim_setup][:vundle_timeout]                = 500
-- default[:vim_setup][:custom_bash_user_after_vundle] = 'true'
-- default[:vim_setup][:custom_bash_once_after_vundle] = 'true'
+- default[:vim_setup][:use_vundle]                     = false
+- default[:vim_setup][:bundle_install]                 = true
+- default[:vim_setup][:vundle_timeout]                 = 500
+- default[:vim_setup][:custom_bash_user_before_vundle] = 'true'
+- default[:vim_setup][:custom_bash_user_after_vundle]  = 'true'
+- default[:vim_setup][:custom_bash_once_after_vundle]  = 'true'
 ~~~
 
 All of attributes in this section can be used to manage the plugins with
@@ -104,7 +104,7 @@ Vundle.
 The `:use_vundle` enables the usage of Vundle to install plugins. The bundle
 directory will be created and Vundle will be cloned to that directory.
 
-After both `:custom_bash_user` and `:custom_bash_once` scripts had run, the
+After both `:custom_bash_user_before_vundle` script had run, the
 ~~~bash
 vim -c 'set shortmess=at' +BundleInstall +qa
 ~~~
