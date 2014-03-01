@@ -46,13 +46,13 @@ can be specified.
 
 ~~~ruby
 - default[:vim_setup][:dotfiles_repo]       = nil
-- default[:vim_setup][:dotfiles_rvmrc_path] = 'vimrc'
+- default[:vim_setup][:dotfiles_rvmrc_path] = '.vimrc'
 - default[:vim_setup][:global]              = true
 - default[:vim_setup][:users]               = []
 ~~~
 
 The `:dotfiles_repo` attribute can specify the git repository that contains
-vimrc, and the `:dotfiles_rvmrc_path` specifies the path to vimrc inside the
+`.vimrc`, and the `:dotfiles_rvmrc_path` specifies the path to vimrc inside the
 repository.
 
 If the `:global` attribute is set to `true`, shared Vim will be set up. The
@@ -63,13 +63,18 @@ Note: both `:global` and `:users` attributes can be used at the same time.
 * * *
 
 ~~~ruby
-- default[:vim_setup][:custom_bash_user] = 'true'
-- default[:vim_setup][:custom_bash_once] = 'true'
+- default[:vim_setup][:custom_preinstall_bash] = 'true'
+- default[:vim_setup][:custom_bash_user]       = 'true'
+- default[:vim_setup][:custom_bash_once]       = 'true'
 ~~~
 
 The attributes `:custom_bash_user` and `:custom_bash_once` can specify custom
 scripts to execute for all individual users (executed as the user) and script
 to be executed once for the root.
+
+The attribute `:custom_preinstall_bash` can specify custom script to be
+executed before any other action. It can be used to install dependencies
+needed to build Vim from source.
 * * *
 
 ~~~ruby
