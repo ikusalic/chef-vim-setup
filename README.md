@@ -31,6 +31,19 @@ This cookbook depends only on the [git cookbook][git-cookbook].
 
 The following attributes are available (default values are also show):
 
+default[:vim_setup][:build_from_source] = false
+default[:vim_setup][:build_parameters]  = <<-HERE
+--prefix=/usr --with-features=huge --enable-rubyinterp --enable-pythoninterp \
+--enable-python3interp --enable-luainterp --enable-perlinterp --enable-cscope
+HERE
+
+The `:build_from_source` attribute specifies if Vim should be build from
+source or installed as package. It defaults to `false`. If
+`:build_from_source` is set to `true`, attribute `:build_parameters` specifies
+what parameters to use to build Vim. This influences the features that are
+enabled in Vim.
+* * *
+
 ~~~ruby
 - default[:vim_setup][:base_packages]       = ['vim-gtk']
 - default[:vim_setup][:additional_packages] = []
@@ -38,7 +51,7 @@ The following attributes are available (default values are also show):
 
 The `:base_packages` attribute defines which packages to install for Vim, the
 default is `vim-gtk` which includes GUI support, but more importantly also has
-the support for Ruby and Python amongs other things.
+the support for Ruby and Python amongst other things.
 
 With the `:additional_packages` attribute additional packages to be installed
 can be specified.
@@ -72,7 +85,7 @@ The attributes `:custom_bash_user` and `:custom_bash_once` can specify custom
 scripts to execute for all individual users (executed as the user) and script
 to be executed once for the root.
 
-The attribute `:custom_preinstall_bash` can specify custom script to be
+The attribute `:custom_preinstall_bash` can specify custom shell script to be
 executed before any other action. It can be used to install dependencies
 needed to build Vim from source.
 * * *
@@ -118,9 +131,9 @@ Modify it as desired.
 
 ## TODOs
 
-Currently tested and developed for use on Ubuntu, but can be easily expanded
-to support other *nix systems. If you want to use it with some other OS, send
-me an email or even better submit a pull request.
+Currently tested and developed for use on Ubuntu and CentOS, but can be easily
+expanded to support other *nix systems. If you want to use it with some other
+OS, send me an email or even better submit a pull request.
 
 The Vundle is my favorite pluing manager, and so some of features are
 Vundle-centric. If you'd like to use something else, you can do it via

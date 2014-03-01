@@ -32,23 +32,31 @@ Vagrant.configure('2') do |config|
       # for TagBar
       apt-get install -y exuberant-ctags
       ln -s `which ctags-exuberant` /usr/local/bin/ctags
+
+      # for YCM
+      apt-get install -y cmake28
+      ln -s `which cmake28` /usr/local/bin/cmake
     HERE
     install_user_vim_plugin_dependencies = <<-HERE
       # for command-t
       cd ~/.vim/bundle/Command-T/ruby/command-t
       ruby extconf.rb
       make
+
+      # for YCM
+      cd ~/.vim/bundle/YouCompleteMe
+      ./install.sh --clang-completer
     HERE
     chef.json = {
       vim_setup: {
+        build_from_source: true,
         custom_bash_user: clone_colo_manually,
         custom_bash_once_after_vundle: install_global_vim_plugin_dependencies,
         custom_bash_user_after_vundle: install_user_vim_plugin_dependencies,
         dotfiles_repo: 'https://github.com/ikusalic/dotfiles.git',
-        global: false,
         users: [ 'vagrant' ],
         use_vundle: true,
-        vundle_timeout: 500,
+        vundle_timeout: 1000,
       }
     }
   end

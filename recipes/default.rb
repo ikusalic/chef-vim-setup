@@ -4,9 +4,24 @@ execute 'custom preinstall bash' do
   command node[:vim_setup][:custom_preinstall_bash]
 end
 
-node[:vim_setup][:base_packages].each { |pkg| package pkg }
+if node[:vim_setup][:build_from_source]
+  package 'mercurial'
 
-node[:vim_setup][:additional_packages].each { |pkg| package pkg }
+  execute 'build from source' do
+    command <<-HERE
+      hg clone https://code.google.com/p/vim/ /tmp/vim
+      cd /tmp/vim
+
+      ./configure #{ node[:vim_setup][:build_parameters] }
+
+      make
+      make install
+    HERE
+  end
+else
+  node[:vim_setup][:base_packages].each { |pkg| package pkg }
+  node[:vim_setup][:additional_packages].each { |pkg| package pkg }
+end
 
 if node[:vim_setup][:dotfiles_repo]
   git 'Checkout dotfiles' do
