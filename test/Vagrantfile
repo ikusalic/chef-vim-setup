@@ -17,6 +17,9 @@ Vagrant.configure('2') do |config|
     chef.add_recipe 'git'
     chef.add_recipe 'vim-setup'
 
+    installation_dependencies = <<-HERE
+      apt-get install -y ncurses-dev
+    HERE
     clone_colo_manually = <<-HERE
       # clone manaully so the Vundle's BundleInstall command works from shell
       git clone https://github.com/Lokaltog/vim-distinguished.git ~/.vim/bundle/vim-distinguished
@@ -49,6 +52,7 @@ Vagrant.configure('2') do |config|
     chef.json = {
       vim_setup: {
         build_from_source: true,
+        custom_preinstall_bash: installation_dependencies,
         custom_bash_user_before_vundle: clone_colo_manually,
         custom_bash_once_after_vundle: install_global_vim_plugin_dependencies,
         custom_bash_user_after_vundle: install_user_vim_plugin_dependencies,

@@ -25,6 +25,7 @@ def build_from_source()
 
   execute 'build from source' do
     command <<-HERE
+      set -e
       hg clone https://code.google.com/p/vim/ /tmp/vim
       cd /tmp/vim
       ./configure #{ node[:vim_setup][:build_parameters] }
