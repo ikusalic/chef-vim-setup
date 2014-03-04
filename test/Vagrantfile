@@ -18,7 +18,7 @@ Vagrant.configure('2') do |config|
     chef.add_recipe 'vim-setup'
 
     installation_dependencies = <<-HERE
-      apt-get install -y ncurses-dev
+      apt-get install -y ncurses-dev python2.7-dev
     HERE
     clone_colo_manually = <<-HERE
       # clone manaully so the Vundle's BundleInstall command works from shell
@@ -37,7 +37,7 @@ Vagrant.configure('2') do |config|
       ln -s `which ctags-exuberant` /usr/local/bin/ctags
 
       # for YCM
-      apt-get install -y cmake python-dev
+      apt-get install -y build-essential cmake python2.7-dev
     HERE
     install_user_vim_plugin_dependencies = <<-HERE
       # for command-t
@@ -47,7 +47,7 @@ Vagrant.configure('2') do |config|
 
       # for YCM
       cd ~/.vim/bundle/YouCompleteMe
-      ./install.sh --clang-completer
+      ./install.sh
     HERE
     chef.json = {
       vim_setup: {

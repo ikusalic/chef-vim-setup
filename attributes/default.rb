@@ -1,7 +1,9 @@
 default[:vim_setup][:build_from_source] = false
 default[:vim_setup][:build_parameters]  = <<-HERE
---prefix=/usr --with-features=huge --enable-rubyinterp --enable-pythoninterp \
---enable-python3interp --enable-luainterp --enable-perlinterp --enable-cscope
+--prefix=/usr --with-features=huge --enable-rubyinterp --enable-perlinterp \
+--enable-pythoninterp --enable-python3interp --enable-luainterp \
+--enable-tclinterp --enable-cscope --enable-fontset --enable-multibyte \
+--enable-largefile
 HERE
 
 default[:vim_setup][:base_packages]       = ['vim-gtk']
