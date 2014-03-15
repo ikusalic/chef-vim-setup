@@ -25,6 +25,8 @@ Vagrant.configure('2') do |config|
       git clone https://github.com/Lokaltog/vim-distinguished.git ~/.vim/bundle/vim-distinguished
     HERE
     install_global_vim_plugin_dependencies = <<-HERE
+      set -e
+
       # for json formatting
       apt-get install -y libjson-xs-perl
 
@@ -40,6 +42,8 @@ Vagrant.configure('2') do |config|
       apt-get install -y build-essential cmake python2.7-dev
     HERE
     install_user_vim_plugin_dependencies = <<-HERE
+      set -e
+
       # for command-t
       cd ~/.vim/bundle/Command-T/ruby/command-t
       ruby extconf.rb

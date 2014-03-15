@@ -71,7 +71,7 @@ def copy_vimrc()
 
       src = File.join '/tmp/dotfiles', node[:vim_setup][:dotfiles_rvmrc_path]
 
-      FileUtils.cp src, '/etc/vim/vimrc' if node[:vim_setup][:global_vimrc]
+      FileUtils.cp(src, that.global_vimrc) if node[:vim_setup][:global_vimrc]
 
       node[:vim_setup][:users].each do |user|
         dest = File.join(that.user_dir(user), '.vimrc')
@@ -80,6 +80,12 @@ def copy_vimrc()
       end
     end
   end
+end
+
+def global_vimrc()
+  tmp_file = '/tmp/syste_vimrc'
+  %x( timeout 1 vim --cmd 'exec("!$(echo $VIM/vimrc > #{ tmp_file })") | :q' )
+  return ( open(tmp_file).read.strip rescue '/etc/vim/vimrc' )
 end
 
 def custom_bash_once()
