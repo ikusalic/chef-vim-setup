@@ -18,6 +18,7 @@ Vagrant.configure('2') do |config|
     chef.add_recipe 'vim-setup'
 
     installation_dependencies = <<-HERE
+      apt-get update
       apt-get install -y ncurses-dev python2.7-dev
     HERE
     clone_colo_manually = <<-HERE
@@ -26,6 +27,8 @@ Vagrant.configure('2') do |config|
     HERE
     install_global_vim_plugin_dependencies = <<-HERE
       set -e
+
+      apt-get update
 
       # for json formatting
       apt-get install -y libjson-xs-perl
@@ -40,6 +43,9 @@ Vagrant.configure('2') do |config|
 
       # for YCM
       apt-get install -y build-essential cmake python2.7-dev
+
+      # for ack
+      apt-get install -y ack-grep
     HERE
     install_user_vim_plugin_dependencies = <<-HERE
       set -e
@@ -61,7 +67,8 @@ Vagrant.configure('2') do |config|
         custom_bash_once_after_vundle: install_global_vim_plugin_dependencies,
         custom_bash_user_after_vundle: install_user_vim_plugin_dependencies,
         dotfiles_repo: 'https://github.com/ikusalic/dotfiles.git',
-        users: [ 'vagrant' ],
+        global_vimrc: true,
+        users: [ 'root', 'vagrant' ],
         use_vundle: true,
         vundle_timeout: 1000,
       }

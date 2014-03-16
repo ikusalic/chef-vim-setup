@@ -1,12 +1,12 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
-    build-essential (1.4.4)
-    runit (1.5.8)
+    build-essential (2.0.0)
+    runit (1.5.10)
       build-essential (>= 0.0.0)
       yum (~> 3.0)
       yum-epel (>= 0.0.0)
-    yum (3.1.2)
+    yum (3.1.4)
     yum-epel (0.3.4)
       yum (~> 3.0)
 

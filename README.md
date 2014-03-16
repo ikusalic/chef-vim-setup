@@ -101,6 +101,9 @@ needed to build Vim from source.
 All of attributes in this section can be used to manage the plugins with
 Vundle.
 
+Note that currently Vundle will be used to install plugins only for the users
+specified in `:users` attribute.
+
 The `:use_vundle` enables the usage of Vundle to install plugins. The bundle
 directory will be created and Vundle will be cloned to that directory.
 

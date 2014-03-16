@@ -12,6 +12,12 @@ def setup()
   handle_vundle
 end
 
+def custom_preinstall_bash()
+  execute 'custom preinstall bash' do
+    command node[:vim_setup][:custom_preinstall_bash]
+  end
+end
+
 def install_vim()
   if node[:vim_setup][:build_from_source]
     build_from_source
@@ -43,13 +49,14 @@ end
 def use_dotfiles()
   return unless node[:vim_setup][:dotfiles_repo]
 
+  log_global_vim_dir
   checkout_dotfiles
   copy_vimrc
 end
 
-def custom_preinstall_bash()
-  execute 'custom preinstall bash' do
-    command node[:vim_setup][:custom_preinstall_bash]
+def log_global_vim_dir()
+  execute('log global vim dir') do  # HACK
+    command "echo | vim -u NONE --cmd '!echo $VIM > /tmp/system_vim_dir' || true"
   end
 end
 
@@ -83,9 +90,11 @@ def copy_vimrc()
 end
 
 def global_vimrc()
-  tmp_file = '/tmp/syste_vimrc'
-  %x( timeout 1 vim --cmd 'exec("!$(echo $VIM/vimrc > #{ tmp_file })") | :q' )
-  return ( open(tmp_file).read.strip rescue '/etc/vim/vimrc' )
+  return File.join global_vim_dir, 'vimrc'
+end
+
+def global_vim_dir()
+  return ( open(tmp_file).read.strip rescue '/usr/share/vim' )
 end
 
 def custom_bash_once()
